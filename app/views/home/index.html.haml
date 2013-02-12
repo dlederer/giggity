@@ -1,4 +1,34 @@
-%h3 Home
-- @users.each do |user|
-  %p
-    User: #{link_to user.name, user}
+.hero-unit.center
+  %h2
+    An online booking platform for student groups and independent performers.
+  %br
+  %p Search for quality performers in your area:
+  = form_for @new_search do |f|
+    = f.select :category, options_for_select(User.category_choices)
+    = f.select :price_level, options_for_select(User.price_level_choices)
+    = f.submit "search", class: "btn btn-primary btn-small up"
+.row.center
+  .span4.offset1
+    %h2 Performers
+    %p Are you a musician, comedian, or another type of live performer? Sign up and start getting more gigs at universities around you!
+  .span4.offset1
+    %h2 University Groups
+    %p Do you belong to a club, committee, or organization at your university? Sign up to find and book live performers for your next event!
+%br
+.row
+  .span12
+    .row
+      .span4
+        %h3 JOIN
+        = form_for new_user do |f|
+          = f.text_field :email, {placeholder: "email", class: "input-block-level"}
+          = f.password_field :password, {placeholder: "password", class: "input-block-level"}
+          = f.submit "signup", {class: "btn btn-block btn-success btn-large"}
+      .span4= image_tag("try_it.png")
+      .span4
+        %h3 LOGIN
+        = form_tag sessions_path do
+          = text_field_tag :email, params[:email], {placeholder: "email", class: "input-block-level"}
+          = password_field_tag :password, params[:password], {placeholder: "password", class: "input-block-level"}
+          = link_to "Forgot password?", forgot_path
+          = submit_tag "login", {class: "btn btn-block btn-primary btn-large"}
