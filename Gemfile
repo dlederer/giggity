@@ -27,7 +27,6 @@ gem "geocoder"
 gem 'address_picker-rails'
 gem "acts-as-importable", :group => :development
 gem 'psych'
-gem "ransack", "~> 0.7.2"
 gem "haml", ">= 3.1.7"
 gem "haml-rails", ">= 0.3.5", :group => :development
 gem "hpricot", ">= 0.8.6", :group => :development
