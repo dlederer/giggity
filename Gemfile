@@ -25,9 +25,7 @@ gem 'remotipart'
 gem "mediaelement_rails"
 gem "geocoder"
 gem 'address_picker-rails'
-group :locals do
-  gem "acts-as-importable"
-end
+gem "acts-as-importable", :group => :development
 gem 'psych'
 gem "ransack", "~> 0.7.2"
 gem "haml", ">= 3.1.7"
