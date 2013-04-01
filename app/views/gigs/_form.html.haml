@@ -1,0 +1,26 @@
+= form_for gig do |f|
+  = f.label :location, "Location:"
+  = f.text_field :location, class: "center"
+  %br
+  = f.label :date, "Date:"
+  
+  = f.datepicker :date, value: gig.date.to_s, class: "center"
+  %br
+  = f.label :rider, "Rider / Contract:"
+  = f.text_area :rider, rows: 15, class: "input-block-level"
+  %br
+  - if !gig.performer_confirm
+    = f.label :price, "Current negotiated price:"
+    .input-prepend
+      %span.add-on{style: "color: black"} $
+      = f.text_field :price, id: "appendedPrependedInput", class: "span1 center"
+    - if current_user.has_role? :performer
+      = f.label :performer_confirm, "Confirm:"
+      = f.check_box :performer_confirm
+    - if current_user.has_role? :booker
+      = "*#{gig.performer.display_name} has not yet approved this price."
+  - if gig.performer_confirm
+    ="#{gig.performer.display_name} approved #{number_to_currency(gig.price)}"
+  %br
+  %br
+  = f.submit "Update Details", class: "btn btn-info btn-block btn-large"

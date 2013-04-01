@@ -1,0 +1,11 @@
+= form_for [@gig, @review], :url => gig_review_path(@gig) do |f|
+  %br
+  = f.label :content, "Review:"
+  = f.text_area :content, rows: 3, class: "span4"
+  = f.hidden_field :user_id, value: @gig.performer_id
+  = f.hidden_field :reviewer_id, value: @gig.booker_id
+  = f.label :score, "Score (out of 10):"
+  = f.number_field :score, class: "span1"
+  %br
+  %br
+  = f.submit "Publish Review", class: "btn btn-success btn-large"

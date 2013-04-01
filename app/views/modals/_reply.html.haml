@@ -1,0 +1,10 @@
+#reply.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3 Reply
+  .modal-body
+    = form_for new_message do |f|
+      %h4 Message:
+      = f.text_area :body, class: "input-block-level", rows: 4
+      = f.hidden_field :to_id, value: message.user_id
+      = f.submit "submit", {class: "btn btn-success  btn-large btn-block"}

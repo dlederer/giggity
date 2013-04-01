@@ -1,6 +1,41 @@
-%h3 Users
-%ul.users
-  - @users.each do |user|
-    %li
-      = link_to user.name, user
-      signed up #{user.created_at.to_date}
+= render 'search'
+
+%h1 Pending Gigs
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Performer
+      %th Last Message
+      %th Last Update
+  %tbody
+    = render @pending_gigs
+      
+
+%br
+%h1 Recommended Performers
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Picture
+      %th Name
+      %th Category
+      %th Subcategory
+      %th Price Level
+      %th Rating (out of 10)
+  %tbody
+    = render @performers
+      
+%br
+%br
+%h1 Featured Performers
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Picture
+      %th Name
+      %th Category
+      %th Subcategory
+      %th Price Level
+      %th
+  %tbody
+    = render @featured

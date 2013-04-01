@@ -1,0 +1,3 @@
+= form_for [user, user.videos.build], remote: true, html: {class: "form-inline"} do |f|
+  = f.text_field :embed_code, placeholder: 'Youtube url'
+  = f.submit "Add", class: "btn btn-primary"

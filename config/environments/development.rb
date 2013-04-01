@@ -1,6 +1,11 @@
 Giggity3::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  config.paperclip_defaults = {
+    storage: :s3,
+    styles: {:medium => "300x300>", :thumb => "100x100>"},
+  }
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -30,6 +35,8 @@ Giggity3::Application.configure do
     user_name: ENV["GMAIL_USERNAME"],
     password: ENV["GMAIL_PASSWORD"]
   }
+  
+  Paperclip.options[:command_path] = "/usr/local/bin"
 
 
 

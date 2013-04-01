@@ -1,0 +1,4 @@
+%h4= message.from.display_name
+%p= message.content
+%em.offset3.pull-right= "sent #{time_ago_in_words(message.created_at)} ago"
+.clearfix

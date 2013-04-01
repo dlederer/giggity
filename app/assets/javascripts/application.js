@@ -12,4 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
+//= require jquery-ui-timepicker-addon.js
+//= require 'rest_in_place'
+//= require jquery_nested_form
+//= require jquery.remotipart
+//= require mediaelement_rails
+//= require address_picker-rails
 //= require_tree .

@@ -1,0 +1,5 @@
+%tr{:onclick => "location.href ='#{url_for(gig)}'"}
+  %td.center= User.find(gig.performer_id).display_name
+  %td.center= last_message(gig)
+  %td
+    %em= "#{time_ago_in_words(gig.updated_at)} ago"

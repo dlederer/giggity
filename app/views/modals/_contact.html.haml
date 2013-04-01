@@ -1,0 +1,17 @@
+#contact.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "modalLabel", :role => "dialog", :tabindex => "-1"}
+  = form_for Gig.new, html: {class: "modal-form"} do |f|
+    = f.hidden_field :performer_id, value: @user.id
+    = f.fields_for :messages, f.object.messages.build do |message_form|
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h3#modalLabel= "Contact #{@user.display_name}"
+      .modal-body
+        = "Begin the booking process by telling #{@user.display_name} a bit about your venue and what type of performance you are looking for."
+        %br
+        %br
+        = message_form.text_area :content, class: "input-block-level", rows: 7
+        = message_form.hidden_field :to_id, value: @user.id
+        %br
+      .modal-footer
+        %button.btn{"data-dismiss" => "modal", "aria-hidden" => "true"} Cancel
+        = f.submit "send message", {class: "btn btn-primary"}

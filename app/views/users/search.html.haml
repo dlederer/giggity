@@ -1,0 +1,15 @@
+= render 'search'
+
+%h1 Search Results
+
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Picture
+      %th Name
+      %th Category
+      %th Subcategory
+      %th Price Level
+      %th Rating (out of 10)
+  %tbody
+    = render @users

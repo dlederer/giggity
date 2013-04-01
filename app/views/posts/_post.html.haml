@@ -1,0 +1,18 @@
+.row
+  - if can? :destroy, @user.posts.new
+    .span10
+      .rest-in-place{ "data-url" => user_post_path(post.user, post), "data-object" => :post, "data-attribute" => :content}
+        = post.content
+      %br
+      %em.offset7= "#{time_ago_in_words(post.created_at)} ago"
+      %br
+      %br
+    .span1
+      = link_to 'delete', user_post_path(post.user, post), method: :delete, remote: true, class: "post-delete btn btn-tiny btn-danger"
+  - else
+    .span12
+      = post.content
+      %br
+      %em.offset9= "#{time_ago_in_words(post.created_at)} ago"
+      %br
+      %br

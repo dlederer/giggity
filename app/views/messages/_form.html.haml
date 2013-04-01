@@ -1,0 +1,6 @@
+.message-form
+  = form_for [@gig, @message], remote: true do |f|
+    = f.text_area :content, class: "input-block-level", rows: 3
+    = f.hidden_field :from_id, value: current_user.id
+    = f.hidden_field :to_id, value: @gig.opposite(current_user).id
+    = f.submit "Reply", class: "btn btn-primary btn-block btn-large"

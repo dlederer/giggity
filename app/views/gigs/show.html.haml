@@ -1,0 +1,23 @@
+.row
+  .span7
+    .well{style: "height: 635px; overflow: auto"}
+      #messages
+        = render @messages
+    = render 'messages/form'
+  .span5
+    .well.center
+      %h1.well-title Details
+      = render partial: 'form', locals: {gig: @gig}
+%hr
+.row
+  .span12
+    .well.center
+      %br
+        %button{class: "btn btn-danger btn-large"} Pay
+- if can? :manage, @review
+  .row
+    .span12
+      .well.center
+        %br
+        %h4 After performance has occurred, please write a review:
+        = render partial: 'reviews/form'

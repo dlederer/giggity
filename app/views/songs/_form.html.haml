@@ -1,0 +1,6 @@
+.song-form
+  = form_for [user, user.songs.build], remote: true, html: {class: "form-inline"} do |f|
+    = f.text_field :embed_code, placeholder: 'Song url (soundcloud)'
+    Or
+    = f.file_field :audio
+    = f.submit "Add", class: "btn btn-primary"

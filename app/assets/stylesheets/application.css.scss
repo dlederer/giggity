@@ -9,12 +9,19 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require jquery.ui.all
+ *= require mediaelement_rails
  *= require_tree .
 */
 
 @mixin alert-box {
     padding: 5px 8px;
     margin: 10px 0;
+}
+
+body {
+  padding-top: 80px;
+  padding-bottom: 10px;
 }
 
 .brand {
@@ -36,6 +43,7 @@ ul.nav {
     @include alert-box;
     background-color: #CFC;
     border: solid 1px #6C6;
+    color: #000000;
 }
 #flash_alert {
     @include alert-box;
@@ -77,3 +85,15 @@ ul.nav {
     position: relative;
     top: -5px;
 }
+
+/* css for timepicker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; }
+.ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }

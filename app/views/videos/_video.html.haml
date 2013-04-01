@@ -1,0 +1,14 @@
+- if params[:action] == "edit"
+  %li.span3{data: {item_id: video.id}}
+    %div.thumbnail
+      %div.video
+        = raw youtube_embed video.embed_code, "100%", ""
+        - if (can? :destroy, video and params[:action] == "edit")
+          = link_to 'delete', user_video_path(video.user, video), method: :delete, remote: true, class: "song-delete btn btn-tiny btn-danger"
+- else
+  %div.video
+    = raw youtube_embed video.embed_code, 560, 340
+    - if (can? :destroy, video and params[:action] == "edit")
+      = link_to 'delete', user_video_path(video.user, video), method: :delete, remote: true, class: "song-delete btn btn-tiny btn-danger"
+    %br
+    %br

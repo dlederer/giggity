@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-      %title= content_for?(:title) ? yield(:title) : "Giggity3"
+      %title= content_for?(:title) ? yield(:title) : "Giggity"
       %meta{:content => content_for?(:description) ? yield(:description) : "Giggity3", :name => "description"}
         = stylesheet_link_tag "application", :media => "all"
         = javascript_include_tag "application"
@@ -16,4 +16,5 @@
       #main{:role => "main"}
         = yield
       %footer
+        = render 'layouts/footer'
     / ! end of #container

@@ -1,0 +1,7 @@
+%tr{:onclick => "location.href ='#{user_path(user)}'"}
+  %td= image_tag performer_pic(user)
+  %td= user.display_name
+  %td= user.category.name
+  %td= user.subcategory
+  %td= user.price_level
+  %td= user.score

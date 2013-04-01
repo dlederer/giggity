@@ -1,0 +1,19 @@
+- if params[:action] == "edit" or (params[:controller] == 'songs' and params[:action] == "create")
+  %li.span3{data: {item_id: song.id}}
+    %div.thumbnail
+      %div.song
+        - if song.embed_code
+          = embed_song(song)
+        - if song.audio_file_name
+          = audio_tag(song.audio.url, width: "100%")
+        - if can? :destroy, song
+          %div
+            = link_to 'delete', user_song_path(song.user, song), method: :delete, remote: true, class: "song-delete btn btn-tiny btn-danger"
+- else
+  %div.song
+    - if song.embed_code
+      = embed_song(song)
+    - if song.audio_file_name
+      = audio_tag(song.audio.url, width: "100%")
+    %br
+    %br
