@@ -1,5 +1,5 @@
 class Search
-  include ActiveModel::Model
+  include ActiveModel::Validations
 
   attr_accessible :query, :price_min, :price_max , :category_id
 end
