@@ -13,6 +13,7 @@ class Legacy::User < Legacy::Base
     styles:
       { profile: "300x300#", thumb: "100x100#" }, 
       storage: :s3,
+      :path => "giggity/users/profile_pics/:attachment/:style/:id.:extension",
       s3_credentials: {
         bucket: 'giggity',
         access_key_id: 'AKIAJ7MVHNF7RGCWOMEA',
@@ -46,10 +47,6 @@ class Legacy::User < Legacy::Base
       if !self.price_level.blank?
         user.price_min = self.price_level.split(' - ')[0].gsub(/[^0-9]/, "").to_i
         user.price_max = self.price_level.split(' - ')[1].gsub(/[^0-9]/, "").to_i
-      end
-      if self.profile_pic_content_type == "image/jpeg"
-        photo = user.build_profile_photo(photo: self.profile_pic)
-        photo.save!
       end
     end
   end

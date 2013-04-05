@@ -8,6 +8,7 @@ gem "cancan"
 gem 'rolify'
 gem "paperclip", "~> 3.0"
 gem 'aws-sdk'
+gem 'rmagick'
 gem 'client_side_validations'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
