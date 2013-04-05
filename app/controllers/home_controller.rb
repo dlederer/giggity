@@ -9,12 +9,6 @@ class HomeController < ApplicationController
       end
     end
     
-    @users = User.all
-    @categories = Category.all
-    @colleges = College.all
-    
-    @q = User.search(params[:q])
-    @people = @q.result(:distinct => true)
   end
   
   def guest
