@@ -76,5 +76,7 @@ module Giggity3
     # Heroku requires this to be false
     config.assets.initialize_on_precompile=false
     
+    config.use_dynamic_shortcuts if defined?(Rails::Server) || defined?(Rails::Console)
+    
   end
 end
