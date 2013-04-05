@@ -21,6 +21,15 @@ class Ability
         can :manage, Message, gig: {booker_id: user.id}
         can :manage, Review, gig: {booker_id: user.id}
       end
+      
+      if user.has_role? :admin
+        can :manage, User
+        can :manage, Song
+        can :manage, Video
+        can :manage, Post
+        can :manage, Gig
+        can :manage, Message
+      end
     end
     #
     # The first argument to `can` is the action you are giving the user 

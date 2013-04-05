@@ -29,6 +29,12 @@ class GigsController < ApplicationController
   # GET /gigs/1.json
   def show
     @messages = @gig.messages.order('created_at DESC').all
+    @messages.each do |message|
+      if message.to_id == current_user.id
+        message.read = true
+        message.save
+      end
+    end
     @performer = @gig.performer
     @message = @gig.messages.new
     

@@ -11,7 +11,7 @@
     - @pending_gigs.each do |gig|
       %tr{:onclick => "location.href ='#{url_for(gig)}'"}
         %td.center= gig.opposite(@user).display_name
-        %td.center= gig.messages.last.content
+        %td.center= gig.messages.last.content unless !gig.messages.last
         %td
           %em= "#{time_ago_in_words(gig.updated_at)} ago"
 %br

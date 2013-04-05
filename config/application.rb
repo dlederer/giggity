@@ -76,7 +76,19 @@ module Giggity3
     # Heroku requires this to be false
     config.assets.initialize_on_precompile=false
     
-    config.use_dynamic_shortcuts if defined?(Rails::Server) || defined?(Rails::Console)
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+        :address              => "smtp.gmail.com",
+        :port                 => 587,
+        :domain               => 'baci.lindsaar.net',
+        :user_name            => 'giggityinfo@gmail.com',
+        :password             => 'Giggitygoo13',
+        :authentication       => 'plain',
+        :enable_starttls_auto => true  }
+        
+    config.action_mailer.default_url_options = { host: "localhost:3000" }
     
   end
 end

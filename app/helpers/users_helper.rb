@@ -12,5 +12,35 @@ module UsersHelper
     return (has1 or has2)
   end
   
+  def user_rating user
+    if user.reviews.count == 0
+      "Unrated"
+    else
+      "#{@user.score}/10"
+    end
+  end
+  
+  def user_category user
+    if user.category and user.subcategory != ""
+      "#{user.category.name} / #{user.subcategory}"
+    elsif user.category
+      user.category.name
+    elsif user.subcategory != ""
+      user.subcategory
+    end
+  end
+  
+  
+  def user_price_range user
+    if user.price_min and user.price_max
+      "$#{user.price_min} - $#{user.price_max}"
+    elsif self.price_min
+      "> $#{user.price_min}"
+    elsif self.price_max
+      "< $#{user.price_max}"
+    else
+      "Not Listed"
+    end
+  end
   
 end

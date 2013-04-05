@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :display_name, :email, :password, :password_confirmation, :remember_me, :newrole
   attr_accessible :address, :address_latitude, :address_longitude
-  attr_accessible :category_id, :subcategory, :blurb, :tab, :featured
+  attr_accessible :category_id, :subcategory, :blurb, :tab, :featured, :price_min, :price_max
   attr_accessible :profile_photo_attributes, :songs_attributes, :videos_attributes
   
   attr_accessible :created_at
@@ -74,12 +74,8 @@ class User < ActiveRecord::Base
     Message.find(:all, :conditions => [ "to_id = ? AND read = 'f'", id]).count
   end
   
-  def price_level
-    "#{self.price_min} - #{self.price_max}"
-  end
-  
   def score
-    self.reviews.count > 0 ? self.reviews.collect(&:score).sum.to_f/self.reviews.count : 0
+    self.reviews.count > 0 ? self.reviews.collect(&:score).sum.to_f/self.reviews.count : "Unrated"
   end
   
   # Checks whether a password is needed or not. For validations only.

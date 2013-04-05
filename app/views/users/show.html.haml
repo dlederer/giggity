@@ -4,10 +4,10 @@
     .picture{style: "position: relative; top: -5px; left: 2px"}= image_tag profpic(@user), class: "img-rounded"
   .span5{style: "position: relative; top: -5px"}
     %h1= @user.display_name
-    %em{style: "position: relative; top: -5px; left: 3px"}= "#{@user.category.name rescue nil} / #{@user.subcategory}"
+    %em{style: "position: relative; top: -5px; left: 3px"}= user_category(@user)
     %br
     - if @user.score != nil
-      %em{style: "position:relative; left: 2px; top: 5px"}="rating: #{@user.score}/10"
+      %em{style: "position:relative; left: 2px; top: 5px"}="rating: #{user_rating @user}"
   - if user_signed_in?
     - if can? :update, @user
       .span4.pull-right{style: "text-align: right"}

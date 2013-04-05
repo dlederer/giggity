@@ -26,6 +26,7 @@ gem "mediaelement_rails"
 gem "geocoder"
 gem 'address_picker-rails'
 gem "acts-as-importable", :group => :development
+gem 'nokogiri'
 gem 'psych'
 gem "haml", ">= 3.1.7"
 gem "haml-rails", ">= 0.3.5", :group => :development

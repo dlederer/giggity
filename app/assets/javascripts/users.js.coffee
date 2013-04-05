@@ -31,10 +31,10 @@ $ ->
     items: 'li'
 
     update: (e, ui) ->
-      item_id = ui.item.data('item_id')
+      item_id = ui.item.data('item-id')
       position = ui.item.index()
-      user_id = $(this).data('user_id')
-      content_type = $(this).data('content_type')
+      user_id = $(this).data('user-id')
+      content_type = $(this).data('content-type')
       item_data = {}
       item_data[content_type] = {row_order_position: position}
       

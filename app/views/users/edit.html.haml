@@ -13,6 +13,10 @@
         = form_for @user, class: "form-horizontal", html: {class: "form-horizontal"} do |f|
           = f.hidden_field :tab, value: "account"
           .control-group
+            .control-label Username
+            .controls
+              .control-label= f.object.username
+          .control-group
             = f.label :display_name, "Display Name", class: "control-label"
             .controls
               = f.text_field :display_name
@@ -43,7 +47,13 @@
               = f.label :subcategory, "Subcategory (musical genre, type of comedy, etc.)", class: "control-label"
               .controls
                 = f.text_field :subcategory
-
+            .control-group
+              = f.label :price_min, "Price Range", class: "control-label"
+              .controls
+                Min:
+                = f.number_field :price_min
+                Max:
+                = f.number_field :price_max
             .control-group
               = f.label :blurb, "Blurb", class: "control-label"
               .controls
