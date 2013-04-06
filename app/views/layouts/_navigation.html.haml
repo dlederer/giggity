@@ -2,6 +2,8 @@
   .navbar-inner
     .container
       = link_to image_tag('logo.png', width: 200, id: "logo"), root_path
+      = form_tag search_users_path, :method => 'get', class: "navbar-search pull-left" do
+        = text_field_tag "query", params[:query], placeholder: "Search", class: "search-query"
       - if user_signed_in?
         %ul.nav.pull-right
           %li.dropdown

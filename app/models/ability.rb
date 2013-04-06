@@ -6,6 +6,7 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
     can :read, User
+    can :search, User
     if user.blank?
       
     else

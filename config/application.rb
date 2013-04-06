@@ -57,7 +57,7 @@ module Giggity3
     config.active_support.escape_html_entities_in_json = true
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
-    # This is necessary if your schema can't be completely dumped by the schema dumper,
+    # This is necessary if your schema can't be completely dumped by the schema dumper,x
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
 
@@ -75,20 +75,6 @@ module Giggity3
     
     # Heroku requires this to be false
     config.assets.initialize_on_precompile=false
-    
-    config.action_mailer.perform_deliveries = true
-    config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-        :address              => "smtp.gmail.com",
-        :port                 => 587,
-        :domain               => 'baci.lindsaar.net',
-        :user_name            => 'giggityinfo@gmail.com',
-        :password             => 'Giggitygoo13',
-        :authentication       => 'plain',
-        :enable_starttls_auto => true  }
-        
-    config.action_mailer.default_url_options = { host: "localhost:3000" }
     
   end
 end

@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
   load_and_authorize_resource :user
   
   def index
@@ -52,6 +51,10 @@ class UsersController < ApplicationController
     if params[:address] and params[:address] != ""
       @users = @users.near(params[:address], 50)
     end
+  end
+  
+  def guest
+    
   end
 
 end

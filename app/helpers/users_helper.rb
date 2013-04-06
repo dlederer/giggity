@@ -34,9 +34,9 @@ module UsersHelper
   def user_price_range user
     if user.price_min and user.price_max
       "$#{user.price_min} - $#{user.price_max}"
-    elsif self.price_min
+    elsif user.price_min
       "> $#{user.price_min}"
-    elsif self.price_max
+    elsif user.price_max
       "< $#{user.price_max}"
     else
       "Not Listed"

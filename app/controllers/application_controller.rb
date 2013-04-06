@@ -24,8 +24,15 @@ class ApplicationController < ActionController::Base
   # find guest_user object associated with the current session,
   # creating one as needed
   def guest_user
-    User.find(session[:guest_user_id] ||= create_guest_user.id)
+    # Cache the value the first time it's gotten.
+    @cached_guest_user ||= User.find(session[:guest_user_id] ||= create_guest_user.id)
+
+  rescue ActiveRecord::RecordNotFound # if session[:guest_user_id] invalid
+     session[:guest_user_id] = nil
+     guest_user
   end
+  
+  private
   
   # called (once) when the user logs in, insert any code your application needs
   # to hand off from guest_user to current_user.

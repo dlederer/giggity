@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   geocoded_by :address, :latitude  => :address_latitude, :longitude => :address_longitude
   reverse_geocoded_by :address_latitude, :address_longitude
   
-  scope :by_query, lambda { |query| where("display_name ILIKE ? OR email ILIKE ? OR blurb ILIKE ? OR subcategory ILIKE ?", query, query, query, query) }
+  scope :by_query, lambda { |query| where("display_name ILIKE ? OR email ILIKE ? OR blurb ILIKE ? OR subcategory ILIKE ?", '%'+query+'%', '%'+query+'%', '%'+query+'%', '%'+query+'%') }
   scope :by_price, lambda { |price| where("(price_min IS NULL OR price_min <= ?) AND (price_max IS NULL OR price_max >= ?)", price, price) }
   scope :by_category, lambda { |category_id| where(:category_id => category_id) }
   
