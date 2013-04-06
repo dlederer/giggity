@@ -9,10 +9,6 @@
   .span4.offset1
     %h2 University Groups
     %p Do you belong to a club, committee, or organization at your university? Sign up to find and book live performers for your next event!
-    - if user_signed_in?
-      = link_to('Logout', destroy_user_session_path, :method => :delete)
-    - else
-      = link_to('Login', new_user_session_path)
 %br
 .row
   .span12
