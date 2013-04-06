@@ -8,12 +8,13 @@
     .well.center
       %h1.well-title Details
       = render partial: 'form', locals: {gig: @gig}
-%hr
-.row
-  .span12
-    .well.center
-      %br
-        %button{class: "btn btn-danger btn-large"} Pay
+- if 0 == 1
+  %hr
+  .row
+    .span12
+      .well.center
+        %br
+          %button{class: "btn btn-danger btn-large"} Pay
 - if can? :manage, @review
   .row
     .span12
