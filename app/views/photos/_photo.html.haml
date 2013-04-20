@@ -1,0 +1,13 @@
+- if params[:action] == "edit" or (params[:controller] == 'photos' and params[:action] == "create")
+  %li.span3{data: {item_id: photo.id}}
+    %div.thumbnail
+      %div.photo
+        .picture{style: "position: relative; top: -5px; left: 2px"}= image_tag photo.photo.url(:medium)
+        - if can? :destroy, photo
+          %div
+            .profile-link
+              = profile_link(photo)
+            = link_to 'delete', user_photo_path(photo.user, photo), method: :delete, remote: true, class: "photo-delete btn btn-tiny btn-danger"
+- else
+  %div.photo
+    .picture{style: "position: relative; top: -5px; left: 2px"}= image_tag photo.photo.url(:medium)

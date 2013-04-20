@@ -51,10 +51,11 @@ class GigsController < ApplicationController
 
   def create
     @gig.booker_id ||= current_user.id
+    @gig.performer_id ||= current_user.id
     @gig.messages[0].from_id ||= current_user.id
     respond_to do |format|
       if @gig.save
-        format.html { redirect_to @gig, notice: 'Photo was successfully created.' }
+        format.html { redirect_to @gig, notice: 'Gig was successfully created.' }
         format.json { render json: @gig, status: :created, location: @gig }
       else
         format.html { render action: "new" }

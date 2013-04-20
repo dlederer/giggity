@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   belongs_to :category
   has_one :college
   
-  has_one :profile_photo, class_name: :Photo
+  belongs_to :profile_photo, class_name: :Photo
   has_many :photos, dependent: :destroy
   has_many :videos, dependent: :destroy
   has_many :songs, dependent: :destroy

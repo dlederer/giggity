@@ -2,9 +2,16 @@
   %h2
     An online booking platform for student groups and independent performers.
   = render 'users/search'
-.row.center
-  .span4.offset1
-    %h2 Performers
+.row.center.top-buffer
+  .span2
+    .row{style:"margin-top:30px"}
+      .span1
+        Click to view all performers
+      .span1
+        .arrow{rel: 90}
+  .span4
+    %h2 
+      = link_to 'Performers', search_users_path
     %p Are you a musician, comedian, or another type of live performer? Sign up and start getting more gigs at universities around you!
   .span4.offset1
     %h2 University Groups

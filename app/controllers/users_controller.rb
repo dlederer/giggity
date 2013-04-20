@@ -14,12 +14,17 @@ class UsersController < ApplicationController
     @posts = @user.posts.order('created_at DESC').all
     @post = @user.posts.new
     @reviews = @user.reviews
+    @photos = @user.photos
+    @photos = @photos.where('id != ?', @user.profile_photo.id) unless !@user.profile_photo 
+    if @user.has_role? :performer
+      render 'performer_show'
+    elsif @user.has_role? :booker
+      render 'booker_show'
+    end
   end
   
   def edit
-    @user.videos.build
-    @user.photos.build
-    @user.build_profile_photo
+    
   end
   
   def update

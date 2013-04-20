@@ -1,0 +1,25 @@
+= render 'modals/contact'
+.row
+  .span3{style: "text-align: center;"}
+    .picture{style: "position: relative; top: -5px; left: 2px"}= image_tag profpic(@user), class: "img-rounded"
+  .span5{style: "position: relative; top: -5px"}
+    %h1= @user.display_name
+  - if user_signed_in?
+    - if can? :update, @user
+      .span4.pull-right{style: "text-align: right"}
+        = link_to 'Edit Profile', edit_user_path(@user), class: "btn btn-info btn-large", style: "position: relative; top: 15px"
+    - else
+      %a.btn.btn-success.btn-large{type: "button", data:{toggle: :modal, target: "#contact"}, style: "position: relative; top: 15px"} Request a Gig
+.row
+  .span12
+    .well{style: "position: relative; top: 10px"}
+      = @user.blurb
+.row
+  .span12
+    .well
+      %h3.well-title Updates
+      #posts
+        = render @posts
+        
+    - if can? :create, @user.posts.new
+      = render 'posts/form'

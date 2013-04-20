@@ -5,7 +5,8 @@
         - if song.embed_code
           = embed_song(song)
         - if song.audio_file_name
-          = audio_tag(song.audio.url, width: "100%")
+          %div
+            = audio_tag(song.audio.url, width: "100%")
         - if can? :destroy, song
           %div
             = link_to 'delete', user_song_path(song.user, song), method: :delete, remote: true, class: "song-delete btn btn-tiny btn-danger"

@@ -19,4 +19,5 @@
 //= require jquery.remotipart
 //= require mediaelement_rails
 //= require address_picker-rails
+//= require bootstrap-arrows
 //= require_tree .

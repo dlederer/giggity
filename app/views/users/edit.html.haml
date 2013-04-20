@@ -1,11 +1,10 @@
 %ul.nav.nav-tabs
   %li.active
     = link_to "Account Settings", "#account", {"data-toggle" => "tab"}
-  - if @user.has_role? :performer 
-    %li
-      = link_to "Profile Settings", '#profile', {"data-toggle" => "tab"}
-    %li
-      = link_to "Media Settings", '#media', {"data-toggle" => "tab"}
+  %li
+    = link_to "Profile Settings", '#profile', {"data-toggle" => "tab"}
+  %li
+    = link_to "Profile Content", '#media', {"data-toggle" => "tab"}
 .tab-content
   #account.tab-pane.active
     .row
@@ -16,10 +15,6 @@
             .control-label Username
             .controls
               .control-label= f.object.username
-          .control-group
-            = f.label :display_name, "Display Name", class: "control-label"
-            .controls
-              = f.text_field :display_name
           .control-group
             = f.label :email, class: "control-label"
             .controls
@@ -32,17 +27,32 @@
               = f.hidden_field :address_longitude, class: 'address-picker-longitude'
           .control-group
             = f.submit "Update profile", class: "btn"
-  - if @user.has_role? :performer 
-    #profile.tab-pane
-      .row
-        .span10
-          = form_for @user, class: "form-horizontal", html: {:multipart => true, class: "form-horizontal"} do |f|
-            = f.hidden_field :tab, value: "profile"
+  #profile.tab-pane
+    .row
+      .span10
+        = form_for @user, class: "form-horizontal", html: {:multipart => true, class: "form-horizontal"} do |f|
+          = f.hidden_field :tab, value: "profile"
+          .control-group
+            = f.label :display_name, "Display Name", class: "control-label"
+            .controls
+              = f.text_field :display_name
+            
+          .control-group
+            = f.label :blurb, "Blurb", class: "control-label"
+            .controls
+              = f.text_area :blurb, rows: 3, class: "input-block-level"
+
+          .control-group
+            .control-label Profile Photo
+            .controls
+              = link_to "Change Photo", '#media', class:"change-photo-link"
+                
+          - if @user.has_role? :performer
             .control-group
               = f.label :category_id, "Gig category", class: "control-label"
               .controls
                 = f.select :category_id, Category.all.collect {|x| [x.name, x.id]}
-      
+                
             .control-group
               = f.label :subcategory, "Subcategory (musical genre, type of comedy, etc.)", class: "control-label"
               .controls
@@ -54,22 +64,21 @@
                 = f.number_field :price_min
                 Max:
                 = f.number_field :price_max
-            .control-group
-              = f.label :blurb, "Blurb", class: "control-label"
-              .controls
-                = f.text_area :blurb, rows: 3, class: "input-block-level"
-
-            .control-group
-              = f.fields_for :profile_photo do |photo_f|
-                = photo_f.label :photo, "Picture", class: "control-label"
-                .controls
-                  = photo_f.file_field :photo
-                  
-            .control-group
-              = f.submit "Update profile", class: "btn"
-            
-    #media.tab-pane
-      #media-accordion.accordion
+          .control-group
+            = f.submit "Update profile", class: "btn"
+  
+  #media.tab-pane
+    #media-accordion.accordion
+      .accordion-group
+        .accordion-heading
+          = link_to 'Photos', '#photos', {class: "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#media-accordion"}
+        #photos.accordion-body.collapse.in
+          .accordion-inner
+            %ul.thumbnails.sortable#photo_list{data: {user_id: @user.id, content_type: :photo}}
+              = render @user.photos.rank(:row_order)
+            %hr
+            = render partial: 'photos/form', locals:{user: @user}
+      - if @user.has_role? :performer 
         .accordion-group
           .accordion-heading
             = link_to 'Songs', '#songs', {class: "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#media-accordion"}
@@ -77,6 +86,7 @@
             .accordion-inner
               %ul.thumbnails.sortable#song_list{data: {user_id: @user.id, content_type: :song}}
                 = render @user.songs.rank(:row_order)
+              %hr
               = render partial: 'songs/form', locals:{user: @user}
         .accordion-group
           .accordion-heading
@@ -85,4 +95,5 @@
             .accordion-inner
               %ul.thumbnails.sortable#video_list{data: {user_id: @user.id, content_type: :video}}
                 = render @user.videos.rank(:row_order)
+              %hr
               = render partial: 'videos/form', locals:{user: @user}

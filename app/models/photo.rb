@@ -9,12 +9,12 @@ class Photo < ActiveRecord::Base
   has_attached_file :photo,
     :styles => {:medium => "300x300>", :thumb => "100x100>"},
     :default_url => '/images/g.png', 
-      storage: :s3,
-      s3_credentials: {
-        bucket: 'giggity_storage',
-        access_key_id: 'AKIAJBMLPUJYAPWYUNYA',
-        secret_access_key: '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'
+    storage: :s3,
+    s3_credentials: {
+      bucket: 'giggity_storage',
+      access_key_id: 'AKIAJBMLPUJYAPWYUNYA',
+      secret_access_key: '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'
     }
     
-  #validates_attachment_presence :photo
+  validates_attachment_presence :photo
 end

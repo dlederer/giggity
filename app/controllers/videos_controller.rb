@@ -9,8 +9,7 @@ class VideosController < ApplicationController
     if @video.save
       render @video
     else
-      logger.debug @video.errors.full_messages.join("\n")
-      render :js => "alert('Error adding song');"
+      render :js => "alert('" + @video.errors.full_messages.to_sentence + "');"
     end
   end
 
@@ -20,7 +19,7 @@ class VideosController < ApplicationController
     if @video.update_attributes(params[:video])
       render nothing: true
     else
-      render :js => "alert('Error updating song');"
+      render :js => "alert('Error updating video');"
     end
   end
 
@@ -28,7 +27,7 @@ class VideosController < ApplicationController
   # DELETE /videos/1.json
   def destroy
     if !@video.destroy
-      render :js => "alert('Error removing song');"
+      render :js => "alert('Error removing video');"
     end
   end
   

@@ -36,6 +36,14 @@
 .row
   .span12
     .well{style: "text-align: center; height: 260px; overflow: auto"}
+      %h3.well-title Photos
+      .rowmodals
+        .span8.offset2{style: "text-align: left"}
+          #photos
+            = render @photos
+.row
+  .span12
+    .well{style: "text-align: center; height: 260px; overflow: auto"}
       %h3.well-title Reviews
       .rowmodals
         .span8.offset2{style: "text-align: left"}

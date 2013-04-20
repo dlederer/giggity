@@ -1,9 +1,7 @@
 Giggity3::Application.routes.draw do
   
-  resources :photos
   resources :songs
   resources :conversations
-
 
   get "static_pages/about"
   devise_for :users
@@ -16,6 +14,9 @@ Giggity3::Application.routes.draw do
     get 'search', :on => :collection
     resources :videos
     resources :songs
+    resources :photos do
+      put 'update_profile', on: :member
+    end
     resources :posts
   end
   resources :gigs do
