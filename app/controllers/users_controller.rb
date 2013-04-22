@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user ||= current_user
     @posts = @user.posts.order('created_at DESC').all
     @post = @user.posts.new
     @reviews = @user.reviews
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
         else
           notice = 'Profile was successfully updated.'
         end
-        format.html  { redirect_to edit_user_path(@user, anchor: params[:user][:tab]),
+        format.html  { redirect_to user_path(@user),
                       :notice => notice }
         format.json  { head :no_content }
       else
@@ -52,9 +53,11 @@ class UsersController < ApplicationController
     if params[:query] and params[:query] != ""
       @users = @users.by_query(params[:query])
     end
-    if params[:price] and params[:price] != ""
-      @users = @users.by_price(params[:price])
-    end
+  
+    price_min = (params[:price_min] and  params[:price_min] != "") ? params[:price_min] : 0
+    price_max = (params[:price_max] and  params[:price_max] != "") ? params[:price_max] : (2**(0.size * 8 -2) -1)
+    @users = @users.by_price(price_min, price_max)
+    
     if params[:category_id] and params[:category_id] != ""
       @users = @users.by_category(params[:category_id])
     end

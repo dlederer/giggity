@@ -76,5 +76,7 @@ module Giggity3
     # Heroku requires this to be false
     config.assets.initialize_on_precompile=false
     
+    config.exceptions_app = ->(env) { ErrorsController.action(:show).call(env) }
+    
   end
 end

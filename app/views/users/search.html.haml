@@ -1,6 +1,8 @@
+
 = render 'search'
 
-%h1 Search Results
+- if !search_empty
+  %h1 Search Results
 
 %table.table.table-striped.table-hover
   %thead

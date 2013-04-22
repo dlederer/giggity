@@ -1,14 +1,13 @@
 Giggity3::Application.routes.draw do
-  
-  resources :songs
-  resources :conversations
 
   get "static_pages/about"
-  devise_for :users
+  devise_for :users, :controllers => {:confirmations => "confirmations"}
 
+  
   authenticated :user do
-    root :to => 'home#index'
+    root :to => 'users#index'
   end
+  root :to => "home#index"
   
   resources :users do
     get 'search', :on => :collection
@@ -22,9 +21,7 @@ Giggity3::Application.routes.draw do
   resources :gigs do
     resources :messages
     resource :review
-  end
-  resources :home
+  end  
   
-  root :to => "home#index"
   get "about" => "static_pages#about"
 end

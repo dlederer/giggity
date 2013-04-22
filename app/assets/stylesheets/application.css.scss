@@ -8,12 +8,43 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require jquery.ui.all
  *= require mediaelement_rails
  *= require bootstrap-arrows
  *= require_tree .
+ *= require_self
 */
+
+.user-link {
+  a {
+    width: 100%;
+    padding-right:0;
+  }
+  
+  img {
+    float:left;
+    height: 40px;
+    margin-top: -10px;
+  }
+  
+  div {
+    float:left;
+    padding-left: 5px;
+  }
+  
+  .divider {
+    margin-top: -1em;
+  }
+}
+
+.divider {
+   width: 1px;
+   height: 1.5em;
+   border-right: 1px solid white;
+   float: right;
+   margin-top: -2.4em;
+}
+
 
 @mixin alert-box {
     padding: 5px 8px;
@@ -37,6 +68,12 @@ ul.nav {
     
     li {
       display: inline;
+      vertical-align: middle;
+    }
+    
+    a {
+      padding-left: .5em !important;
+      padding-right: .5em !important;
     }
 }
 

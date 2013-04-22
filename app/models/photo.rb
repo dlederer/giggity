@@ -7,7 +7,7 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   
   has_attached_file :photo,
-    :styles => {:medium => "300x300>", :thumb => "100x100>"},
+    :styles => {:medium => "300x300>", :thumb => "100x100>", :tiny =>"50x50"},
     :default_url => '/images/g.png', 
     storage: :s3,
     s3_credentials: {

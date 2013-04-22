@@ -26,7 +26,9 @@ class VideosController < ApplicationController
   # DELETE /videos/1
   # DELETE /videos/1.json
   def destroy
-    if !@video.destroy
+    if @video.destroy
+      render nothing: true
+    else
       render :js => "alert('Error removing video');"
     end
   end

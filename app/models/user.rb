@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   reverse_geocoded_by :address_latitude, :address_longitude
   
   scope :by_query, lambda { |query| where("display_name ILIKE ? OR email ILIKE ? OR blurb ILIKE ? OR subcategory ILIKE ?", '%'+query+'%', '%'+query+'%', '%'+query+'%', '%'+query+'%') }
-  scope :by_price, lambda { |price| where("(price_min IS NULL OR price_min <= ?) AND (price_max IS NULL OR price_max >= ?)", price, price) }
+  scope :by_price, lambda { |price_min, price_max| where("(price_min IS NULL OR price_min >= ?) AND (price_max IS NULL OR price_max <= ?)", price_min, price_max) }
   scope :by_category, lambda { |category_id| where(:category_id => category_id) }
   
   def newrole=(a_role) #set the name

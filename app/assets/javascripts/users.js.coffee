@@ -32,7 +32,7 @@ $ ->
         .removeAttr('disabled', 'disabled')
         .val('');
       $('#posts').prepend(xhr.responseText).children(":first").hide().show('fast').find('.post-delete').click ->
-        $(this).parent().parent().fadeOut(500);
+        $(this).parent().parent().fadeOut(500).remove()
         
         
 $ ->
@@ -76,37 +76,36 @@ reset_profile_links = () ->
   $('.profile-link a').click(reset_profile_links)
 
 $ ->
-  $('.post-delete, .video-delete').click -> 
-    $(this).parent().parent().fadeOut(500)
+  $('.post-delete').click -> 
+    $(this).parent().parent().fadeOut(500).remove()
+    
+$ ->
+  $('.delete-link').click -> 
+    $(this).parent().parent().parent().parent().fadeOut(500, =>
+        $(this).parent().parent().parent().parent().remove()
+    )
     
 $ ->
   $('.profile-link a').click(reset_profile_links)
-  
-$ ->
-  $('.song-delete').click ->
-    $(this).parent().parent().parent().fadeOut(500)
-    
-$ ->
-  $('.photo-delete').click ->
-    $(this).parent().parent().parent().parent().fadeOut(500)
 
-$ ->
-  $(".song-form form")
-    .on "ajax:success", (evt, data, status, xhr) ->
-      $('#song_list').append(xhr.responseText).children(":last").hide().show('fast')
       
 $ ->
-  $(".video-form form")
+  $("#media-accordion form")
+    .on "ajax:beforeSend", (evt, xhr, settings) ->
+      $(this).find('input[type=text], input[type=submit]')
+        .addClass('uneditable-input')
+        .attr('disabled', 'disabled');
     .on "ajax:success", (evt, data, status, xhr) ->
       if xhr.responseText.substring(0, 5) != "alert"
-        $('#video_list').append(xhr.responseText).children(":last").hide().show('fast')
-      
-$ ->
-  $(".photo-form form")
-    .on "ajax:success", (evt, data, status, xhr) ->
-      $('#photo_list').append(xhr.responseText)
-      new_photo = $('#photo_list').children(":last")
-      new_photo.hide().show('fast')
-      new_photo.find('.profile-link a').click(reset_profile_links)
-      new_photo.find('.photo-delete').click ->
-        $(this).parent().parent().parent().parent().fadeOut(500)
+        $(this).find('input[type=text], input[type=submit]').removeClass('uneditable-input')
+                                        .removeAttr('disabled', 'disabled')
+        $(this).find('input[type=text]').val('')
+        file_input = $(this).find('input[type=file]')
+        file_input .wrap('<form>').closest('form').get(0).reset()
+        file_input .unwrap()
+        $($(this).parent().siblings('ul')[0]).append(xhr.responseText).children(":last").hide().show('fast')
+        $('.delete-link').click -> 
+          $(this).parent().parent().parent().parent().fadeOut(500, =>
+              $(this).parent().parent().parent().parent().remove()
+          )
+        $('.profile-link a').click(reset_profile_links)

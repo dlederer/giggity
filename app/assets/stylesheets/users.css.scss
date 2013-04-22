@@ -19,3 +19,8 @@
 .photo, .picture {
   display: inline;
 }
+
+input[type="file"] {
+  background-color: transparent;
+  border: 0;
+}
