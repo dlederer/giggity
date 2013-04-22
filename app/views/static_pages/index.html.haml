@@ -21,21 +21,11 @@
   .span12
     .row
       .span4
-        %h3 JOIN
-        = form_for(resource, as: resource_name, validate: true, url: registration_path(resource_name)) do |f|
-          = devise_error_messages!
-          = f.text_field :username, validate: {presence: true, :uniqueness => true}, placeholder: "username", class: "input-block-level"
-          = f.email_field :email, :validate => { :presence => true}, placeholder: "email", class: "input-block-level"
-          = f.password_field :password, :validate => { :presence => true, :confirmation => true}, placeholder: "password", class: "input-block-level"
-          = f.password_field :password_confirmation, :validate => { :presence => true }, placeholder: "password confirmation", class: "input-block-level"
-          = f.radio_button :newrole, "performer"
-          = f.label :newrole_performer, "Performer"
-          = f.radio_button :newrole, "booker"
-          = f.label :newrole_booker, "Booker"
-          = f.submit "Signup", class: "btn btn-block btn-primary btn-large"
+        %h2 Sign up
+        = render 'users/form'
       .span4= image_tag("try_it.png")
       .span4
-        %h3 LOGIN
+        %h2 Sign in
         = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
           = f.text_field :username, autofocus: true, placeholder: "username"
           = f.password_field :password, placeholder: "password"

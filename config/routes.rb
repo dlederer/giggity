@@ -7,7 +7,7 @@ Giggity3::Application.routes.draw do
   authenticated :user do
     root :to => 'users#index'
   end
-  root :to => "home#index"
+  root :to => "static_pages#index"
   
   resources :users do
     get 'search', :on => :collection

@@ -1,7 +1,9 @@
+World(Rack::Test::Methods)
+
 ### UTILITY METHODS ###
 
 def create_visitor
-  @visitor ||= { :name => "Testy McUserton", :email => "example@example.com",
+  @visitor ||= { :username => "Testy McUserton", :email => "example@example.com",
     :password => "changeme", :password_confirmation => "changeme" }
 end
 
@@ -13,7 +15,7 @@ def create_unconfirmed_user
   create_visitor
   delete_user
   sign_up
-  visit '/users/sign_out'
+  sign_out
 end
 
 def create_user
@@ -22,15 +24,27 @@ def create_user
   @user = FactoryGirl.create(:user, @visitor)
 end
 
+def create_booker
+  create_visitor
+  delete_user
+  @user = FactoryGirl.create(:booker, @visitor)
+end
+
+def create_performer
+  create_visitor
+  delete_user
+  @user = FactoryGirl.create(:performer, @visitor)
+end
+
 def delete_user
-  @user ||= User.where(:email => @visitor[:email]).first
+  @user ||= User.where(:username => @visitor[:username]).first
   @user.destroy unless @user.nil?
 end
 
 def sign_up
   delete_user
   visit '/users/sign_up'
-  fill_in "user_name", :with => @visitor[:name]
+  fill_in "user_username", :with => @visitor[:username]
   fill_in "user_email", :with => @visitor[:email]
   fill_in "user_password", :with => @visitor[:password]
   fill_in "user_password_confirmation", :with => @visitor[:password_confirmation]
@@ -40,18 +54,22 @@ end
 
 def sign_in
   visit '/users/sign_in'
-  fill_in "user_email", :with => @visitor[:email]
+  fill_in "user_username", :with => @visitor[:username]
   fill_in "user_password", :with => @visitor[:password]
   click_button "Sign in"
 end
 
+def sign_out
+  Capybara.current_session.driver.delete destroy_user_session_path
+end
+
 ### GIVEN ###
 Given /^I am not logged in$/ do
-  visit '/users/sign_out'
+  sign_out
 end
 
 Given /^I am logged in$/ do
-  create_user
+  create_performer
   sign_in
 end
 
@@ -75,7 +93,7 @@ When /^I sign in with valid credentials$/ do
 end
 
 When /^I sign out$/ do
-  visit '/users/sign_out'
+  sign_out
 end
 
 When /^I sign up with valid user data$/ do
@@ -83,9 +101,11 @@ When /^I sign up with valid user data$/ do
   sign_up
 end
 
-When /^I sign up with an invalid email$/ do
+When /^I sign up with an invalid username$/ do
   create_visitor
-  @visitor = @visitor.merge(:email => "notanemail")
+  delete_user
+  @user = FactoryGirl.create(:user, @visitor)
+  create_visitor
   sign_up
 end
 
@@ -111,8 +131,8 @@ When /^I return to the site$/ do
   visit '/'
 end
 
-When /^I sign in with a wrong email$/ do
-  @visitor = @visitor.merge(:email => "wrong@example.com")
+When /^I sign in with a wrong username$/ do
+  @visitor = @visitor.merge(:username => "wronguser")
   sign_in
 end
 
@@ -122,10 +142,10 @@ When /^I sign in with a wrong password$/ do
 end
 
 When /^I edit my account details$/ do
-  click_link "Edit account"
-  fill_in "user_name", :with => "newname"
-  fill_in "user_current_password", :with => @visitor[:password]
-  click_button "Update"
+  
+  all("Update Profile")[0].click
+  fill_in "user_email", :with => "newname@example.com"
+  click_button "Update profile"
 end
 
 When /^I look at the list of users$/ do
@@ -141,7 +161,7 @@ end
 
 Then /^I should be signed out$/ do
   page.should have_content "Sign up"
-  page.should have_content "Login"
+  page.should have_content "Sign in"
   page.should_not have_content "Logout"
 end
 
@@ -157,8 +177,13 @@ Then /^I should see a successful sign up message$/ do
   page.should have_content "Welcome! You have signed up successfully."
 end
 
-Then /^I should see an invalid email message$/ do
-  page.should have_content "Email is invalid"
+Then /^I should see a required confirmation message$/ do
+  page.should have_content "A message with a confirmation link has been sent to your email address."
+end
+
+
+Then /^I should see an invalid username message$/ do
+  page.should have_content "Username is invalid"
 end
 
 Then /^I should see a missing password message$/ do
@@ -187,5 +212,5 @@ end
 
 Then /^I should see my name$/ do
   create_user
-  page.should have_content @user[:name]
+  page.should have_content @user[:display_name]
 end
