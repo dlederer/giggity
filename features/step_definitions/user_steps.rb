@@ -43,7 +43,7 @@ end
 
 def sign_up
   delete_user
-  visit '/users/sign_up'
+  visit new_user_registration_path
   fill_in "user_username", :with => @visitor[:username]
   fill_in "user_email", :with => @visitor[:email]
   fill_in "user_password", :with => @visitor[:password]
@@ -53,7 +53,7 @@ def sign_up
 end
 
 def sign_in
-  visit '/users/sign_in'
+  visit new_user_session_path
   fill_in "user_username", :with => @visitor[:username]
   fill_in "user_password", :with => @visitor[:password]
   click_button "Sign in"
