@@ -96,13 +96,15 @@ $ ->
         .addClass('uneditable-input')
         .attr('disabled', 'disabled');
     .on "ajax:success", (evt, data, status, xhr) ->
+      $(this).find('input[type=text], input[type=submit]').removeClass('uneditable-input')
+                                      .removeAttr('disabled', 'disabled')
       if xhr.responseText.substring(0, 5) != "alert"
-        $(this).find('input[type=text], input[type=submit]').removeClass('uneditable-input')
-                                        .removeAttr('disabled', 'disabled')
         $(this).find('input[type=text]').val('')
         file_input = $(this).find('input[type=file]')
-        file_input .wrap('<form>').closest('form').get(0).reset()
-        file_input .unwrap()
+        if $(this).find('input[type=file]').count > 0
+          file_input .wrap('<form>').closest('form').get(0).reset()
+          file_input .unwrap()
+        
         $($(this).parent().siblings('ul')[0]).append(xhr.responseText).children(":last").hide().show('fast')
         $('.delete-link').click -> 
           $(this).parent().parent().parent().parent().fadeOut(500, =>
