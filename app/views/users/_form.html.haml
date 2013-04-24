@@ -1,14 +1,14 @@
-.span4
-  = form_for(resource, as: resource_name, validate: true, url: registration_path(resource_name)) do |f|
-    = devise_error_messages!
-    = f.text_field :username, validate: {presence: true, :uniqueness => true}, placeholder: "username", class: "input-block-level"
-    = f.email_field :email, :validate => { :presence => true}, placeholder: "email", class: "input-block-level"
-    = f.password_field :password, :validate => { :presence => true, :confirmation => true}, placeholder: "password", class: "input-block-level"
-    = f.password_field :password_confirmation, :validate => { :presence => true }, placeholder: "password confirmation", class: "input-block-level"
+= form_for(resource, as: resource_name, validate: true, url: registration_path(resource_name)) do |f|
+  = devise_error_messages!
+  = f.text_field :username, validate: {presence: true, :uniqueness => true}, placeholder: "username", class: "input-block-level"
+  = f.email_field :email, :validate => { :presence => true}, placeholder: "email", class: "input-block-level"
+  = f.password_field :password, :validate => { :presence => true, :confirmation => true}, placeholder: "password", class: "input-block-level"
+  = f.password_field :password_confirmation, :validate => { :presence => true }, placeholder: "password confirmation", class: "input-block-level"
+  .radios
     = f.label :newrole_performer, {class:"radio inline"} do
       = f.radio_button :newrole, "performer"
       Performer
     = f.label :newrole_booker, {class:"radio inline"} do
       = f.radio_button :newrole, "booker"
       Booker
-    = f.submit "Sign up", class: "btn btn-block btn-primary btn-large"
+  = f.submit "Sign up", class: "btn btn-block btn-success btn-large"

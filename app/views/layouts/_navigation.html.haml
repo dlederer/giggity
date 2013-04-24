@@ -3,14 +3,14 @@
     .container
       = link_to image_tag('logo.png', width: 200, id: "logo"), root_path
       = form_tag search_users_path, :method => 'get', class: "navbar-search pull-left" do
-        = text_field_tag "query", params[:query], placeholder: "Search", class: "search-query"
+        = text_field_tag "query", params[:query], placeholder: "search", class: "search-query span2"
       - if user_signed_in?
         %ul.nav.pull-right
           %li.user-link
             = link_to user_path(current_user) do
               = image_tag(menupic(current_user))
               %div
-                = current_user.display_name
+                = current_user.name
             .divider
           %li
             = link_to 'Home', users_path

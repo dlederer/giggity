@@ -62,6 +62,14 @@ class User < ActiveRecord::Base
     end    
   end
   
+  def name
+    if self.display_name
+      self.display_name
+    else
+      self.username
+    end
+  end
+  
   def self.performers
     User.with_role :performer
   end
@@ -83,6 +91,10 @@ class User < ActiveRecord::Base
   # or confirmation are being set somewhere.
   def password_required?
     !persisted? || !password.nil? || !password_confirmation.nil?
+  end
+  
+  def self.price_level_choices
+    [["Select a price level", nil], "$0 - $200", "$200 - $500", "$500 - $1,000", "$1,000 - $2,000", "$2,000 - $5,000", "$5,000 - $10,000", "$10,000 - $20,000", "> $20,000"]
   end
   
 end

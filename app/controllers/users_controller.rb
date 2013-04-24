@@ -12,10 +12,11 @@ class UsersController < ApplicationController
 
   def show
     @user ||= current_user
+    @videos = @user.videos.rank(:row_order)
+    @songs = @user.songs.rank(:row_order)
     @posts = @user.posts.order('created_at DESC').all
-    @post = @user.posts.new
     @reviews = @user.reviews
-    @photos = @user.photos
+    @photos = @user.photos.rank(:row_order)
     @photos = @photos.where('id != ?', @user.profile_photo.id) unless !@user.profile_photo 
     if @user.has_role? :performer
       render 'performer_show'

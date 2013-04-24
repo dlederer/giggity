@@ -1,7 +1,11 @@
 .hero-unit.center
-  %h2
-    An online booking platform for student groups and independent performers.
-  = render 'users/search'
+  %h2 An online booking platform for student groups and independent performers.
+  %br
+  %p Search for quality performers in your area:
+  = form_tag search_users_path, :method => 'get', class: "form-inline" do
+    = select_tag "category_id", options_for_select([["Select a category", ""]] + Category.all.collect {|x| [x.name, x.id]}, params[:category_id])
+    = select_tag :price_range, options_for_select(User.price_level_choices)
+    = submit_tag "search", :name => nil, class: "btn btn-primary btn-small"
 .row.center.top-buffer
   .span2
     .row{style:"margin-top:30px"}
@@ -21,14 +25,14 @@
   .span12
     .row
       .span4
-        %h2 Sign up
+        %h3 JOIN
         = render 'users/form'
       .span4= image_tag("try_it.png")
       .span4
-        %h2 Sign in
+        %h3 LOGIN
         = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-          = f.text_field :username, autofocus: true, placeholder: "username"
-          = f.password_field :password, placeholder: "password"
+          = f.text_field :username, autofocus: true, placeholder: "username", class: "input-block-level"
+          = f.password_field :password, placeholder: "password", class: "input-block-level"
           %br
           = link_to "Forgot password?", new_password_path(resource_name)
           = f.submit "login", class: "btn btn-block btn-primary btn-large"

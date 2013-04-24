@@ -16,45 +16,53 @@
       %a.btn.btn-success.btn-large{type: "button", data:{toggle: :modal, target: "#contact"}, style: "position: relative; top: 15px"} Book a Gig
 .row
   .span12
-    .well{style: "position: relative; top: 10px"}
+    .well#blurb
       = @user.blurb
-.row{style: "position: relative; top: 5px"}
-  - if @user.category_id == 1
+- if @songs.any? and @videos.any?
+  .row
     .span4
-      .well{style: "height: 350px; overflow: auto; text-align: center"}
+      .well#songs
         %h3.well-title Songs
-        = render @user.songs.rank(:row_order)
+        = render @songs
     .span8
-      .well{style: "height: 350px; overflow: auto; text-align: center"}
+      .well#videos
         %h3.well-title Videos
-        = render @user.videos.rank(:row_order)
-  - else
+        = render @videos
+- elsif @songs.any
+  .row
     .span12
-      .well{style: "height: 350px; overflow: auto; text-align: center"}
+      .well#songs
+        %h3.well-title Songs
+        = render @songs
+- elsif @videos.any
+  .row
+    .span12
+      .well#videos
         %h3.well-title Videos
-        = render @user.videos.rank(:row_order)
-.row
-  .span12
-    .well{style: "text-align: center; height: 260px; overflow: auto"}
-      %h3.well-title Photos
-      .rowmodals
-        .span8.offset2{style: "text-align: left"}
-          #photos
-            = render @photos
-.row
-  .span12
-    .well{style: "text-align: center; height: 260px; overflow: auto"}
-      %h3.well-title Reviews
-      .rowmodals
-        .span8.offset2{style: "text-align: left"}
-          #reviews
+        = render @videos
+
+- if @photos.any?
+  .row
+    .span12
+      .well#photos
+        %h3.well-title Photos
+        = render @photos
+
+- if @reviews.any?
+  .row
+    .span12
+      .well#reviews
+        %h3.well-title Reviews
+        .rowmodals
+          .span8.offset2{style: "text-align: left"}
             = render @reviews
-.row
-  .span12
-    .well
-      %h3.well-title Updates
-      #posts
-        = render @posts
-        
+
+- if @posts.any? or can? :create, @user.posts.new
+  .row
+    - if @posts.any?
+      .span12
+        .well#updates
+          %h3.well-title Updates
+          = render @posts
     - if can? :create, @user.posts.new
       = render 'posts/form'
