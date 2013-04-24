@@ -28,13 +28,13 @@
       .well#videos
         %h3.well-title Videos
         = render @videos
-- elsif @songs.any
+- elsif @songs.any?
   .row
     .span12
       .well#songs
         %h3.well-title Songs
         = render @songs
-- elsif @videos.any
+- elsif @videos.any?
   .row
     .span12
       .well#videos
