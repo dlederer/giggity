@@ -1,5 +1,5 @@
 .post-form
-  = form_for [@user, @post], remote: true do |f|
+  = form_for [@user, @user.posts.build], remote: true do |f|
     = f.text_area :content, rows: 3, class: "input-block-level"
     = f.hidden_field :user_id, value: @user.id
     = f.submit "post new update", class: "btn btn-primary btn-block"
