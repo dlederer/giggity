@@ -54,9 +54,15 @@ class UsersController < ApplicationController
     if params[:query] and params[:query] != ""
       @users = @users.by_query(params[:query])
     end
-  
-    price_min = (params[:price_min] and  params[:price_min] != "") ? params[:price_min] : 0
-    price_max = (params[:price_max] and  params[:price_max] != "") ? params[:price_max] : (2**(0.size * 8 -2) -1)
+    
+    if params[:price_range] and  params[:price_range] != ""
+      price_min, price_max = params[:price_range].split(' - ').map{ |x| b = x.reverse.chop.reverse.sub(',','')}
+      params[:price_min] = price_min
+      params[:price_max] = price_max
+    else
+      price_min = (params[:price_min] and  params[:price_min] != "") ? params[:price_min] : 0
+      price_max = (params[:price_max] and  params[:price_max] != "") ? params[:price_max] : (2**(0.size * 8 -2) -1)
+    end
     @users = @users.by_price(price_min, price_max)
     
     if params[:category_id] and params[:category_id] != ""

@@ -2,7 +2,7 @@
       = label_tag "query", "Search: "
       = text_field_tag "query", params[:query], placeholder: "Query"
       = select_tag "category_id", options_for_select([["Any", ""]] + Category.all.collect {|x| [x.name, x.id]}, params[:category_id]), class: "input-small"
-      = text_field_tag "price_min", params[:price], placeholder: "Price Min", class: "input-small"
-      = text_field_tag "price_max", params[:price], placeholder: "Price Max", class: "input-small"
+      = text_field_tag "price_min", params[:price_min], placeholder: "Price Min", class: "input-small"
+      = text_field_tag "price_max", params[:price_max], placeholder: "Price Max", class: "input-small"
       = text_field_tag "address", params[:address], placeholder: "Near to", class: "address-picker-input"
       = submit_tag "Search", :name => nil
