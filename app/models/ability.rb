@@ -23,12 +23,7 @@ class Ability
       end
       
       if user.has_role? :admin
-        can :manage, User
-        can :manage, Song
-        can :manage, Video
-        can :manage, Post
-        can :manage, Gig
-        can :manage, Message
+        can :manage, :all
       end
     end
   end

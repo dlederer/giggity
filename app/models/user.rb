@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :confirmable
          
   belongs_to :category
-  has_one :college
+  belongs_to :college
   
   belongs_to :profile_photo, class_name: :Photo
   has_many :photos, dependent: :destroy
@@ -19,9 +19,10 @@ class User < ActiveRecord::Base
   has_many :performer_gigs, class_name: :Gig, foreign_key:'performer_id', :dependent => :destroy
   has_many :reviews, through: :performer_gigs
   
-  accepts_nested_attributes_for :videos, :allow_destroy => true
-  accepts_nested_attributes_for :songs, :allow_destroy => true
-  accepts_nested_attributes_for :profile_photo, :allow_destroy => true
+  accepts_nested_attributes_for :videos, allow_destroy: true
+  accepts_nested_attributes_for :songs, allow_destroy: true
+  accepts_nested_attributes_for :posts, allow_destroy: true
+  accepts_nested_attributes_for :profile_photo, allow_destroy: true
   
   attr_accessor :newrole, :tab
   
@@ -29,7 +30,7 @@ class User < ActiveRecord::Base
   attr_accessible :username, :display_name, :email, :password, :password_confirmation, :remember_me, :newrole
   attr_accessible :address, :address_latitude, :address_longitude
   attr_accessible :category_id, :subcategory, :blurb, :tab, :featured, :price_min, :price_max
-  attr_accessible :profile_photo_attributes, :songs_attributes, :videos_attributes
+  attr_accessible :profile_photo_attributes, :songs_attributes, :videos_attributes, :posts_attributes
   
   attr_accessible :created_at
   
@@ -95,6 +96,10 @@ class User < ActiveRecord::Base
   
   def self.price_level_choices
     [["Select a price level", nil], "$0 - $200", "$200 - $500", "$500 - $1,000", "$1,000 - $2,000", "$2,000 - $5,000", "$5,000 - $10,000", "$10,000 - $20,000", "> $20,000"]
+  end
+  
+  def page_title
+    self.username
   end
   
 end

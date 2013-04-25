@@ -29,6 +29,7 @@ gem 'nokogiri'
 gem 'psych'
 gem "haml"
 gem "figaro"
+gem 'activeadmin', github: 'gregbell/active_admin'
 
 group :development, :test do
   gem "rspec-rails"
@@ -40,7 +41,6 @@ group :development do
   gem "quiet_assets"
   gem "hpricot"
   gem "haml-rails"
-  gem "acts-as-importable"
   gem "ruby_parser"
   gem "better_errors"
   gem "binding_of_caller"

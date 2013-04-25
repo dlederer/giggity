@@ -1,5 +1,7 @@
 Giggity3::Application.routes.draw do
 
+  ActiveAdmin.routes(self)
+
   get "static_pages/about"
   devise_for :users, :controllers => {:confirmations => "confirmations"}
 
