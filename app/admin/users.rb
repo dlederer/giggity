@@ -24,16 +24,35 @@ ActiveAdmin.register User do
   end
   
   show title: :page_title do |ad|
-    attributes_table do
-      row :username
-      row :email
-      row :display_name
-      row :featured
-      row :blurb
-      if ad.has_role? :performer
-        row :category
-        row :price_min
-        row :price_max
+    panel "Account Info" do
+      attributes_table_for user do
+        row :username
+        row :email
+        row :address
+        row :featured
+        row :created_at
+        row :updated_at
+      end
+    end
+    panel "Profile Info" do
+      attributes_table_for user do
+        row :display_name
+        row :blurb
+        if ad.has_role? :performer
+          row :category
+          row :subcategory
+          row :price_min
+          row :price_max
+        end
+      end
+    end
+    panel "Login Info" do
+      attributes_table_for user do
+        row :sign_in_count
+        row :current_sign_in_at
+        row :last_sign_in_at
+        row :current_sign_in_ip
+        row :last_sign_in_ip
       end
     end
     panel "Updates" do
@@ -80,5 +99,13 @@ ActiveAdmin.register User do
   
   action_item :only => :show do
     link_to('Edit on site', edit_user_path(user))
+  end
+  
+  batch_action :feature do |selection|
+    User.find(selection).each do |user|
+      user.featured = true
+      user.save
+      redirect_to collection_path
+    end
   end
 end

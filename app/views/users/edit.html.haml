@@ -72,8 +72,8 @@
     #media-accordion.accordion
       .accordion-group
         .accordion-heading
-          = link_to 'Photos', '#photos', {class: "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#media-accordion"}
-        #photos.accordion-body.collapse.in
+          = link_to 'Photos', '#photos-edit', {class: "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#media-accordion"}
+        #photos-edit.accordion-body.collapse.in
           .accordion-inner
             %ul.thumbnails.sortable#photo_list{data: {user_id: @user.id, content_type: :photo}}
               = render @user.photos.rank(:row_order)
@@ -82,8 +82,8 @@
       - if @user.has_role? :performer 
         .accordion-group
           .accordion-heading
-            = link_to 'Songs', '#songs', {class: "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#media-accordion"}
-          #songs.accordion-body.collapse
+            = link_to 'Songs', '#songs-edit', {class: "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#media-accordion"}
+          #songs-edit.accordion-body.collapse
             .accordion-inner
               %ul.thumbnails.sortable#song_list{data: {user_id: @user.id, content_type: :song}}
                 = render @user.songs.rank(:row_order)
@@ -91,8 +91,8 @@
               = render partial: 'songs/form', locals:{user: @user}
         .accordion-group
           .accordion-heading
-            = link_to 'Videos', '#videos', {class: "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#media-accordion"}
-          #videos.accordion-body.collapse
+            = link_to 'Videos', '#videos-edit', {class: "accordion-toggle", "data-toggle" => "collapse", "data-parent" => "#media-accordion"}
+          #videos-edit.accordion-body.collapse
             .accordion-inner
               %ul.thumbnails.sortable#video_list{data: {user_id: @user.id, content_type: :video}}
                 = render @user.videos.rank(:row_order)

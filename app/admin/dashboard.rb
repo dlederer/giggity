@@ -6,20 +6,22 @@ ActiveAdmin.register_page "Dashboard" do
 
     # Here is an example of a simple dashboard with columns and panels.
     #
+    
     columns do
       column do
-        panel "Recent Users" do
-          ul do
-            User.last(5).map do |user|
-              li link_to(user.username, admin_user_path(user))
-            end
+        panel "Recent New Users" do
+          table_for User.last(10).reverse() do |t|
+            t.column("Username") { |user| link_to(user.username, admin_user_path(user)) }
+            t.column("Created At") { |user| user.created_at }
           end
         end
       end
-
       column do
-        panel "Info" do
-          para "Welcome to ActiveAdmin."
+        panel "Recent Updated Users" do
+          table_for User.find(:all, order: 'updated_at DESC', limit: 10) do |t|
+            t.column("Username") { |user| link_to(user.username, admin_user_path(user)) }
+            t.column("Updated At") { |user| user.updated_at }
+          end
         end
       end
     end
