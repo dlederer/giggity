@@ -32,13 +32,8 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        if params[:user][:email]
-          notice = "You must confirm your new email address"
-        else
-          notice = 'Profile was successfully updated.'
-        end
         format.html  { redirect_to user_path(@user),
-                      :notice => notice }
+                      :notice => 'Profile was successfully updated.' }
         format.json  { head :no_content }
       else
         format.html  { redirect_to edit_user_path(@user, anchor: params[:user][:tab]),
