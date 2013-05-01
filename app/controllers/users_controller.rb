@@ -60,8 +60,11 @@ class UsersController < ApplicationController
       params[:price_min] = price_min
       params[:price_max] = price_max
     else
-      price_min = (params[:price_min] and  params[:price_min] != "") ? params[:price_min] : 0
-      price_max = (params[:price_max] and  params[:price_max] != "") ? params[:price_max] : (2**(0.size * 8 -2) -1)
+      price_min = (params[:price_min] and  params[:price_min] != "") ? params[:price_min].to_i : 0
+      price_max = (params[:price_max] and  params[:price_max] != "") ? params[:price_max].to_i : (2**(0.size * 8 -2) -1)
+    end
+    if price_min > 0 or price_max < (2**(0.size * 8 -2) -1)
+      @users = @users.order(:price_min)
     end
     @users = @users.by_price(price_min, price_max)
     

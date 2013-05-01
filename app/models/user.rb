@@ -86,7 +86,7 @@ class User < ActiveRecord::Base
   end
   
   def score
-    self.reviews.count > 0 ? self.reviews.collect(&:score).sum.to_f/self.reviews.count : "Unrated"
+    self.reviews.count > 0 ? self.reviews.collect(&:score).sum.to_f/self.reviews.count : "N/A"
   end
   
   # Checks whether a password is needed or not. For validations only.
