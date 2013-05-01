@@ -1,38 +1,22 @@
 .hero-unit.center
-  %h2 An online booking platform for student groups and independent performers.
-  %br
-  %p Search for quality performers in your area:
-  = form_tag search_users_path, :method => 'get', class: "form-inline" do
-    = select_tag "category_id", options_for_select([["Select a category", ""]] + Category.all.collect {|x| [x.name, x.id]}, params[:category_id])
-    = select_tag :price_range, options_for_select(User.price_level_choices)
-    = submit_tag "search", :name => nil, class: "btn btn-primary btn-small"
-.row.center.top-buffer
-  .span2
-    .row{style:"margin-top:30px"}
-      .span1
-        Click to view all performers
-      .span1
-        .arrow{rel: 90}
-  .span4
-    %h2 
-      = link_to 'Performers', search_users_path
-    %p Are you a musician, comedian, or another type of live performer? Sign up and start getting more gigs at universities around you!
-  .span4.offset1
-    %h2 University Groups
-    %p Do you belong to a club, committee, or organization at your university? Sign up to find and book live performers for your next event!
-%br
+  %h2
+    An online booking platform for Live
+    = link_to 'Performers', search_users_path
 .row
-  .span12
-    .row
-      .span4
-        %h3 JOIN
-        = render 'users/form'
-      .span4= image_tag("try_it.png")
-      .span4
-        %h3 LOGIN
-        = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-          = f.text_field :username, autofocus: true, placeholder: "username", class: "input-block-level"
-          = f.password_field :password, placeholder: "password", class: "input-block-level"
-          %br
-          = link_to "Forgot password?", new_password_path(resource_name)
-          = f.submit "login", class: "btn btn-block btn-primary btn-large"
+  .span8
+    %iframe{width: 560, height: 315, src:"http://www.youtube.com/embed/qt37LJVCfJ8", frameborder:0, allowfullscreen:true}
+  .span4
+    = form_for(resource, as: resource_name, validate: true, url: registration_path(resource_name)) do |f|
+      = devise_error_messages!
+      = f.text_field :username, validate: {presence: true, :uniqueness => true}, placeholder: "Username", class: "input-block-level"
+      = f.email_field :email, :validate => { :presence => true}, placeholder: "Email Address", class: "input-block-level"
+      = f.password_field :password, :validate => { :presence => true, :confirmation => true}, placeholder: "Password", class: "input-block-level"
+      = f.password_field :password_confirmation, :validate => { :presence => true }, placeholder: "Password Confirmation", class: "input-block-level"
+      .radios
+        = f.label :newrole_booker, {class:"radio inline"} do
+          = f.radio_button :newrole, "booker"
+          Booker
+        = f.label :newrole_performer, {class:"radio inline"} do
+          = f.radio_button :newrole, "performer"
+          Performer
+      = f.submit "Sign up", class: "btn btn-block btn-success btn-large"

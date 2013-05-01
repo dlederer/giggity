@@ -24,12 +24,12 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :posts, allow_destroy: true
   accepts_nested_attributes_for :profile_photo, allow_destroy: true
   
-  attr_accessor :newrole, :tab
+  attr_accessor :newrole, :tab, :confirmed_tou
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :display_name, :email, :password, :password_confirmation, :remember_me, :newrole
   attr_accessible :address, :address_latitude, :address_longitude
-  attr_accessible :category_id, :subcategory, :blurb, :tab, :featured, :price_min, :price_max
+  attr_accessible :category_id, :subcategory, :blurb, :tab, :featured, :price_min, :price_max, :confirmed_tou
   attr_accessible :profile_photo_attributes, :songs_attributes, :videos_attributes, :posts_attributes
   
   attr_accessible :created_at
@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :username
   validates_format_of     :email, :with  => /\A[^@]+@[^@]+\z/, :allow_blank => true
   validates_associated :songs, :videos, :photos
+ # validates_acceptance_of :confirmed_tou
+  validates :newrole, :presence => true, on: :create
 
   with_options :if => :password_required? do |v|
     v.validates_presence_of     :password

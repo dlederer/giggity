@@ -30,3 +30,20 @@
                 %li= link_to "Profile", current_user
               %li
               %li= link_to('Logout', destroy_user_session_path, :method => :delete)
+      - else
+        %ul.nav.pull-right
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Login
+              %i.icon-user.icon-white
+              %b.caret
+            %ul.dropdown-menu
+              %li.nav-header LOGIN
+              .login{style: "padding-left: 10px; padding-right: 10px"}
+                = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+                  %li
+                    = f.text_field :username, {placeholder: "username"}
+                  %li
+                    = f.password_field :password, {placeholder: "password"}
+                  %li
+                    = f.submit "login", {class: "btn btn-block btn-primary btn-large"}
