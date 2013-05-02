@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   end
   
   def name
-    if self.display_name
+    if self.display_name != ""
       self.display_name
     else
       self.username
