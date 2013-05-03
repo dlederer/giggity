@@ -2,11 +2,10 @@
 <html>
 <head>
 <title>Giggity</title>
-<link href="/assets/application-d53346c98a31887f49873694f85df04d.css" media="all" rel="stylesheet" type="text/css" />
-<script src="/assets/application-475f63f9852c721913f959556e5a7ddb.js" type="text/javascript"></script>
-<meta content="authenticity_token" name="csrf-param" />
-<meta content="ikBU3/4D9xl3PIOyz/h9solvEWwS1Fe2vO2Kw7BLcKU=" name="csrf-token" />
-<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+<meta name="description" content="Giggity">
+<%= stylesheet_link_tag "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
 </head>
 <body>
 <div class='container'>
@@ -196,24 +195,7 @@ Working on some new projects...stay tuned over the next week!
 </div>
 </div>
 </div>
-
-<br>
-<br>
-<br>
-<br>
-<hr>
-<footer>
-<div class='row'>
-<div class='span5'>
-<a href="/demo_convo.html">Sample Conversation</a>
-<a href="/demo_profile">Sample Performer Profile</a>
-</div>
-<div class='span7' style='font-weight: 100; font-style: italic; font-size: 10px; text-align: right'>
-<a href="http://www.maxbrody.co"><img alt="Maxbrody_logo" id="maxbrody_logo" src="/assets/maxbrody_logo-6fb203561bc6379c8831f8235c41c92d.png" width="150" /></a>
-</div>
-</div>
-</footer>
-</hr>
+<%= render 'layouts/footer' %>
 
 </div>
 </body>

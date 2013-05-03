@@ -47,3 +47,5 @@
                     = f.password_field :password, {placeholder: "password"}
                   %li
                     = f.submit "login", {class: "btn btn-block btn-primary btn-large"}
+                  %li
+                    = link_to "Forgot your password?", new_password_path(resource_name)

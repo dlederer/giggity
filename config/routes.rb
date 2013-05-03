@@ -3,6 +3,8 @@ Giggity3::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   get "static_pages/about"
+  get "static_pages/demo_convo"
+  get "static_pages/demo_profile"
   devise_for :users, :controllers => {:confirmations => "confirmations"}
 
   
@@ -26,4 +28,6 @@ Giggity3::Application.routes.draw do
   end  
   
   get "about" => "static_pages#about"
+  get "demo_convo" => "static_pages#demo_convo"
+  get "demo_profile" => "static_pages#demo_profile"
 end

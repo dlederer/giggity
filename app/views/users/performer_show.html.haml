@@ -53,9 +53,7 @@
     .span12
       .well#reviews
         %h3.well-title Reviews
-        .rowmodals
-          .span8.offset2{style: "text-align: left"}
-            = render @reviews
+        = render @reviews
 
 - if @posts.any? or can? :create, @user.posts.new
   .row
