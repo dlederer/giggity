@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   validates_format_of     :email, :with  => /\A[^@]+@[^@]+\z/, :allow_blank => true
   validates_associated :songs, :videos, :photos
  # validates_acceptance_of :confirmed_tou
-  validates :newrole, :presence => true, on: :create
+ # validates :newrole, inclusion:[:booker, :performer], on: :create
 
   with_options :if => :password_required? do |v|
     v.validates_presence_of     :password
@@ -86,7 +86,11 @@ class User < ActiveRecord::Base
   end
   
   def score
-    self.reviews.count > 0 ? self.reviews.collect(&:score).sum.to_f/self.reviews.count : "N/A"
+    score = Review.average(:score, conditions:['user_id = ?',self.id])
+    if score == nil
+      score = 'N/A'
+    end
+    score
   end
   
   # Checks whether a password is needed or not. For validations only.

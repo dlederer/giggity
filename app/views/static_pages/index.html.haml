@@ -17,6 +17,6 @@
           = f.radio_button :newrole, "booker"
           Booker
         = f.label :newrole_performer, {class:"radio inline"} do
-          = f.radio_button :newrole, "performer"
+          = f.radio_button :newrole, "performer", {:checked => true}
           Performer
       = f.submit "Sign up", class: "btn btn-block btn-success btn-large"
