@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: ENV['SENDGRID_USERNAME']
+  default from: "giggityinfo@gmail.com"
 
   def welcome_email(user)
     @user = user
