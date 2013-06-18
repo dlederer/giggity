@@ -29,6 +29,7 @@ ActiveAdmin.register User do
         row :username
         row :email
         row :address
+        row :account_type
         row :featured
         row :created_at
         row :updated_at
@@ -72,6 +73,7 @@ ActiveAdmin.register User do
       f.input :username
       f.input :email
       f.input :address
+      f.input :account_type
     end
     f.inputs "Admin Settings" do
       f.input :featured

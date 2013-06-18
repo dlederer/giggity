@@ -71,14 +71,14 @@ ActiveRecord::Schema.define(:version => 20130424144225) do
   end
 
   create_table "photos", :force => true do |t|
+    t.integer  "user_id"
     t.string   "description"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.integer  "user_id"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
     t.integer  "row_order"
   end
 
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20130424144225) do
     t.integer  "college_id"
     t.text     "blurb"
     t.boolean  "featured",               :default => false
+    t.integer  "photo_id"
     t.integer  "score"
     t.integer  "price_min"
     t.integer  "price_max"

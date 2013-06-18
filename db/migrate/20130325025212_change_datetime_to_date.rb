@@ -1,4 +1,4 @@
-class ChangeDatetimeToDateAndTime < ActiveRecord::Migration
+class ChangeDatetimeToDate < ActiveRecord::Migration
   def change
     change_column :gigs, :date, :date
     add_column :gigs, :time, :time

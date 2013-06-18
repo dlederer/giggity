@@ -108,4 +108,14 @@ class User < ActiveRecord::Base
     self.username
   end
   
+  def account_type
+    if self.has_role? :performer
+      "Performer"
+    elsif self.has_role? :booker
+      "Booker"
+    else
+      "Other"
+    end
+  end
+  
 end
